@@ -290,7 +290,7 @@ export class WebsocketProvider extends ObservableV2 {
      * when a new connection is established.
      * @type {Object<string,string>}
      */
-    this.params = params
+    this.params = { ...params, roomname }
     this.protocols = protocols
     this.roomname = roomname
     this.doc = doc
@@ -402,8 +402,7 @@ export class WebsocketProvider extends ObservableV2 {
 
   get url () {
     const encodedParams = url.encodeQueryParams(this.params)
-    return this.serverUrl + '/' + this.roomname +
-      (encodedParams.length === 0 ? '' : '?' + encodedParams)
+    return this.serverUrl + (encodedParams.length === 0 ? '' : '?' + encodedParams)
   }
 
   /**
